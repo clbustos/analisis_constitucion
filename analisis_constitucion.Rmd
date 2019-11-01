@@ -3,8 +3,9 @@ title: "Análisis de los cambios entre la versión del 2005 y la versión origin
 author: "clbustos"
 date: "1/11/2019"
 output:
-  pdf_document: default
+  md_document: default
   html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}

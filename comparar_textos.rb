@@ -1,35 +1,9 @@
-# Copyright (c) 2019, Claudio Bustos
-# All rights reserved.
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are met:
-# 1. Redistributions of source code must retain the above copyright notice, this
-# list of conditions and the following disclaimer.
-# 2. Redistributions in binary form must reproduce the above copyright notice,
-# this list of conditions and the following disclaimer in the documentation
-# and/or other materials provided with the distribution.
-#
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
-# ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-# (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-# ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-# SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#
-# The views and conclusions contained in the software and documentation are those
-# of the authors and should not be interpreted as representing official policies,
-# either expressed or implied, of the AnCont project.
-
-
 # Este es un código malo, MALO, para comparar la constitución del 1980 en su formulación actual
 # con respecto a su versión original. Eliminé los artículos transitorios porque son, precisamente, transitorios.
 #
 # El análisis se realiza desde la constitución del 2005 hacia la versión del 1980, para ver cuanto de la constitución
 # en su forma actual mantiene de la antigua. Se puede hacer el análisis inverso, para lo cual bastaría cambiar
-# el origen y destino en la sección final
+# el origen y destino en la sección final. Se encuentra comentado el código al final.
 #
 # Utilizo la distancia de Levenshtein (https://es.wikipedia.org/wiki/Distancia_de_Levenshtein)
 # para encontrar párrafos similares entre la versión del 80 y la del 2005.
@@ -37,6 +11,10 @@
 # Establezco 4 niveles de similitud: completa, casi_completa (hasta dos letras distintas), parecido (20% o menos de distancia), no_hay parecido (20% o más)
 # El resultado se exporta a csv, el cual debe ser analizado a mano para determinar si las diferencias son menores o sustanciales
 #
+# A mejorar: 
+# * Se podría hacer un barrido previo para eliminar espacios de más y 
+# * esas cosas. En general, la redacción es idéntica hasta en las 
+# * faltas de ortografía, pero puede aliviar un par de problemas.
 #
 require 'fileutils'
 require "levenshtein"
@@ -136,13 +114,13 @@ end
 c2005=File.read("2018.txt")
 c1980=File.read("1980.txt")
 
-#ct=ComparadorTexto.new(c2005, c1980, "d2005_1980")
-#ct.procesar_parecidos
-#ct.grabar_csv("d2005_1980.csv")
-
-ct=ComparadorTexto.new(c1980, c2005, "d1980_2005")
+ct=ComparadorTexto.new(c2005, c1980, "d2005_1980")
 ct.procesar_parecidos
-ct.grabar_csv("d1980_2005.csv")
+ct.grabar_csv("d2005_1980.csv")
+
+#ct=ComparadorTexto.new(c1980, c2005, "d1980_2005")
+#ct.procesar_parecidos
+#ct.grabar_csv("d1980_2005.csv")
 
 
 
