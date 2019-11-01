@@ -114,9 +114,43 @@ gobiernos regionales.
     ggplot(a,aes(x=i,y=texto_origen_n, color=tipo_cambio))+
       geom_point()+
       geom_rug()+
+      xlab("Párrafo")+
       ylab("Caracteres del párrafo")
 
 ![](README_files/figure-markdown_strict/unnamed-chunk-4-1.png)
+
+Una forma alternativa de visualización es con área sobrepuestas. Aquí se
+puede ver como ya en los primeros 20 párrafos se produce un importante
+cambio en términos de contenido nuevo, pero a partir de ahí lo que se
+producen son cambios mayores, manteniéndose en un nivel relativamente
+constante de aparición del contenido original.
+
+    a2=data.frame(
+      cambio_mayor_n=ifelse(a$tipo_cambio=="cambio_mayor",a$texto_origen_n,0),
+      cambio_menor_n=ifelse(a$tipo_cambio=="cambio_menor",a$texto_origen_n,0),
+      no_hay_parecido_n=ifelse(a$tipo_cambio=="no_hay_parecido",a$texto_origen_n,0),
+      sin_cambio_n=ifelse(a$tipo_cambio=="sin_cambio",a$texto_origen_n,0),
+      total=a$texto_origen_n
+    )
+    a2.c=data.frame(i=a$i,lapply(a2,cumsum))
+    a2.m=melt(a2.c[,-6],id.vars = "i")
+
+    ggplot(a2.m,aes(x=i,y=value, fill=variable))+
+      geom_area()+
+      xlab("Párrafo")+
+      ylab("Caracteres del párrafo")
+
+![](README_files/figure-markdown_strict/unnamed-chunk-5-1.png)
+
+    a2.cp=data.frame(i=a2.c$i, a2.c[,2:5]/a2.c$total)
+    a2.mp=melt(a2.cp,id.vars = "i")
+
+    ggplot(a2.mp,aes(x=i,y=value, fill=variable))+
+      geom_area()+
+      xlab("Párrafo")+
+      ylab("Proporción del texto")
+
+![](README_files/figure-markdown_strict/unnamed-chunk-5-2.png)
 
 Conclusión
 ==========
