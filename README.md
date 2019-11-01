@@ -1,17 +1,18 @@
-# Análisis de contenido de la Constitución Política de la República de Chile
+Análisis de contenido de la Constitución Política de la República de Chile
+==========================================================================
 
-*Análisis de los cambios entre la versión del 2005 y la versión original de 1980 de la Constitución Política de la República de Chile*
+*Análisis de los cambios entre la versión del 2005 y la versión original
+de 1980 de la Constitución Política de la República de Chile*
 
-
-## Objetivo
-
+Objetivo
+--------
 
 El objetivo del siguiente análisis es identificar en qué porcentaje la
 versión del 2005 de la Constitución Política de la República de Chile ha
 sido modificada desde la versión de 1980.
 
 Para ello, en un primer momento se realizó un análisis párrafo a
-párrafo, el cual se identificaron los párrafos que presentan la misma
+párrafo, el cual se identificaron aquellos que presentaban la misma
 redacción y, en aquellos con redacción distinta, la distancia entre las
 cadenas usando la distancia de Levenshtein
 (<a href="https://es.wikipedia.org/wiki/Distancia_de_Levenshtein" class="uri">https://es.wikipedia.org/wiki/Distancia_de_Levenshtein</a>).
@@ -35,7 +36,8 @@ categorías
 Analizaremos primero por párrafos, para después intentar hacer un
 análisis por palabra
 
-## Análisis por párrafo
+Análisis por párrafo
+--------------------
 
 Podemos observar que el análisis considera 706 párrafos. un 48% de los
 párrafos no presenta mayor cambio, un 1.84% presenta cambios menores y
@@ -71,7 +73,8 @@ cambio mayor es un 26% del total.
     ## 3 no_hay_parecido 56033 33.352579
     ## 4      sin_cambio 65772 39.149534
 
-## Análisis de modificaciones mayores
+Análisis de modificaciones mayores
+----------------------------------
 
 Considerando el alto porcentaje de párrafos modificados, es conveniente
 tener una idea de cuanta grande fue el cambio realizado. Si usamos como
@@ -91,9 +94,10 @@ esta es prácticamente uniforme en el rango.
 
     hist(p.cambio)
 
-![](analisis_constitucion_files/figure-markdown_strict/unnamed-chunk-3-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-3-1.png)
 
-## Distribución de los cambios
+Distribución de los cambios
+---------------------------
 
 Si analizamos la distribución de cambios, podemos observar que hasta el
 párrafo 200 la estructura es la misma. Tras esta sección, se comienzan a
@@ -107,11 +111,15 @@ VIII relacionado al tribunal constitucional. Muchos de las innovaciones
 se observan tras el párrafo 600, con el Capítulo XIV, que regula los
 gobiernos regionales.
 
-    ggplot(a,aes(x=i,y=texto_origen_n, color=tipo_cambio))+geom_point()+geom_rug()+ylab("Caracteres del párrafo")
+    ggplot(a,aes(x=i,y=texto_origen_n, color=tipo_cambio))+
+      geom_point()+
+      geom_rug()+
+      ylab("Caracteres del párrafo")
 
-![](analisis_constitucion_files/figure-markdown_strict/unnamed-chunk-4-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-4-1.png)
 
-## Conclusión
+Conclusión
+==========
 
 Existe un importante porcentaje de la Constitución en su versión del
 2005, cercano al 40% de su contenido, que no ha cambiado en absoluto
